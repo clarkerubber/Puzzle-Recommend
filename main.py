@@ -4,12 +4,6 @@ import operator
 import pprint
 from pymongo import MongoClient
 
-
-def difference(set_a, set_b):
-  set_a = set(set_a)
-  set_b = set(set_b)
-  return len(set_a ^ set_b)
-
 def update_structures(puzzleColl, p):
   board = chess.Board(p['fen'])
   puzzleColl.update_one({'_id': p['_id']}, {'$set': {'w_pawns': int(board.pieces(chess.PAWN, True)), 'b_pawns': int(board.pieces(chess.PAWN, False))}}, upsert = True)
